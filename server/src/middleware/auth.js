@@ -1,12 +1,13 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+require('dotenv').config();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 const auth = async (req, res, next) => {
   try {
     const token = req.cookies.token;
-    console.log(token);
+    console.log("toek",token);
     
     if (!token) {
       return res.status(401).json({ message: 'Authentication required' });
