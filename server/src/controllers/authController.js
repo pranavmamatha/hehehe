@@ -5,8 +5,6 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 const COOKIE_OPTIONS = {
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
-  sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
-  path: '/',
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 };
 
@@ -30,11 +28,7 @@ exports.register = async (req, res) => {
     // Set cookie
     res.cookie('token', token, COOKIE_OPTIONS);
     
-    res.status(201).json({
-      message: 'User registered successfully',
-      token,
-      type: 'Bearer'
-    });
+    res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Error registering user', error: error.message });
   }
@@ -57,30 +51,23 @@ exports.login = async (req, res) => {
     }
 
     // Generate token
+    console.log("@auth router", JWT_SECRET);
+    
     const token = jwt.sign({ userId: user._id }, JWT_SECRET);
-
+    
     // Set cookie
     res.cookie('token', token, COOKIE_OPTIONS);
-
-    res.json({
-      message: 'Logged in successfully',
-      token,
-      type: 'Bearer',
-      user: {
-        id: user._id,
-        username: user.username
-      }
-    });
+    
+    res.json({ message: 'Logged in successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Error logging in', error: error.message });
   }
 };
 
 exports.logout = (req, res) => {
-  res.clearCookie('token', { path: '/' });
+  res.clearCookie('token');
   res.json({ message: 'Logged out successfully' });
 };
-
 exports.updateTags = async (req, res) => {
   try {
     const { tags } = req.body;

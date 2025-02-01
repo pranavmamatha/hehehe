@@ -5,24 +5,20 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 const auth = async (req, res, next) => {
   try {
-    let token;
-
-    // Check cookie first
-    if (req.cookies.token) {
-      token = req.cookies.token;
-    }
-    // Then check Authorization header
-    else if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
-      token = req.headers.authorization.split(' ')[1];
-    }
-
+    const token = req.cookies.token;
+    console.log(token);
+    
     if (!token) {
       return res.status(401).json({ message: 'Authentication required' });
     }
 
+    console.log("token",JWT_SECRET);
+    
+
     const decoded = jwt.verify(token, JWT_SECRET);
     const user = await User.findById(decoded.userId);
-    
+    // console.log(user);
+        
     if (!user) {
       return res.status(401).json({ message: 'User not found' });
     }
@@ -30,8 +26,10 @@ const auth = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
+    console.log(error);
+    
     res.status(401).json({ message: 'Authentication failed' });
   }
 };
 
-module.exports = auth; 
+module.exports = auth;
