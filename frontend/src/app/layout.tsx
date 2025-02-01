@@ -24,9 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" enableSystem>
+    <html lang="en" >
       <body
-        enableSystem
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider

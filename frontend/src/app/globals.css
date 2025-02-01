@@ -69,4 +69,23 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Add these new styles */
+  h2 {
+    font-family: var(--font-geist-sans);
+    font-weight: 500;
+  }
+  
+  input {
+    @apply bg-background border-input;
+  }
+  
+  .rounded-lg {
+    border-radius: 1rem;
+  }
+}
+
+/* Add custom styles for the layout */
+.grid {
+  grid-template-rows: auto;
 }

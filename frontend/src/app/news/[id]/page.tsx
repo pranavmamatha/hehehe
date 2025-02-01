@@ -16,8 +16,8 @@ const Page = () => {
       try {
         console.log(params.id);
         
-        const response = await axios.get(`http://localhost:3001/api/news/${params.id}`, {withCredentials: true})
-        setNews(response.data.data)
+        const response = await axios.get(`http://localhost:3001/api/news/${params.id}`, {withCredentials: true});
+        setNews(response.data.data);
         console.log(response.data.data);
         
         setLoading(false)
@@ -41,12 +41,12 @@ const Page = () => {
           <h1 className="text-3xl font-bold">{news.title}</h1>
         </CardHeader>
         <CardContent>
-          <p className="text-gray-600">{news.description}</p>
+          <p className="text-white/90">{news.description}</p>
           <div className="mt-4">
             <h3 className="font-semibold mb-2">Tags:</h3>
             <div className="flex gap-2 flex-wrap">
               {news.tags?.map((tag: string) => (
-                <span key={tag} className="bg-gray-200 px-2 py-1 rounded-md text-sm">
+                <span key={tag} className="bg-gray-900 px-2 py-1 rounded-md text-sm">
                   {tag}
                 </span>
               ))}
