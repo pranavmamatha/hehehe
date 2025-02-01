@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProductsSection from "@/components/sections/ProductsSection";
 import AuthSection from "@/components/sections/AuthSection";
+import NewsSection from "@/components/sections/NewsSection";
 
 export default function Home() {
   return (
@@ -24,7 +25,7 @@ export default function Home() {
         
         <TabsContent value="news">
           <>
-            news
+            <NewsSection />
           </>
         </TabsContent>
         
